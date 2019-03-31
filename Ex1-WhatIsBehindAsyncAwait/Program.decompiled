@@ -1,0 +1,98 @@
+// Decompiled with JetBrains decompiler
+// Type: Ex1_WhatIsBehindAsyncAwait.Program
+// Assembly: Ex1-WhatIsBehindAsyncAwait, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 572A5A9B-4729-4FA0-BE9E-016B8A6C6D84
+// Assembly location: C:\Users\T\Documents\Projects\Windays19\Ex1-WhatIsBehindAsyncAwait\bin\Debug\netcoreapp2.1\Ex1-WhatIsBehindAsyncAwait.dll
+// Compiler-generated code is shown
+
+using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+
+namespace Ex1_WhatIsBehindAsyncAwait
+{
+  internal class Program
+  {
+    private static void Main(string[] args)
+    {
+      Console.WriteLine("[START] Before 'SleepAsync().Wait()'...");
+      Program.SleepAsync().Wait();
+      Console.WriteLine("[END] Press any key to exit...");
+      Console.ReadLine();
+    }
+
+    [AsyncStateMachine(typeof (Program.<SleepAsync>d__1))]
+    [DebuggerStepThrough]
+    private static Task SleepAsync()
+    {
+      Program.<SleepAsync>d__1 stateMachine = new Program.<SleepAsync>d__1();
+      stateMachine.<>t__builder = AsyncTaskMethodBuilder.Create();
+      stateMachine.<>1__state = -1;
+      stateMachine.<>t__builder.Start<Program.<SleepAsync>d__1>(ref stateMachine);
+      return stateMachine.<>t__builder.Task;
+    }
+
+    public Program()
+    {
+      base.\u002Ector();
+    }
+
+    [CompilerGenerated]
+    private sealed class <SleepAsync>d__1 : IAsyncStateMachine
+    {
+      public int <>1__state;
+      public AsyncTaskMethodBuilder <>t__builder;
+      private TaskAwaiter <>u__1;
+
+      public <SleepAsync>d__1()
+      {
+        base.\u002Ector();
+      }
+
+      void IAsyncStateMachine.MoveNext()
+      {
+        int num1 = this.<>1__state;
+        try
+        {
+          TaskAwaiter awaiter;
+          int num2;
+          if (num1 != 0)
+          {
+            Console.WriteLine("Before delay...");
+            awaiter = Task.Delay(3000).GetAwaiter();
+            if (!awaiter.IsCompleted)
+            {
+              this.<>1__state = num2 = 0;
+              this.<>u__1 = awaiter;
+              Program.<SleepAsync>d__1 stateMachine = this;
+              this.<>t__builder.AwaitUnsafeOnCompleted<TaskAwaiter, Program.<SleepAsync>d__1>(ref awaiter, ref stateMachine);
+              return;
+            }
+          }
+          else
+          {
+            awaiter = this.<>u__1;
+            this.<>u__1 = new TaskAwaiter();
+            this.<>1__state = num2 = -1;
+          }
+          awaiter.GetResult();
+          Console.WriteLine("After delay...");
+        }
+        catch (Exception ex)
+        {
+          this.<>1__state = -2;
+          this.<>t__builder.SetException(ex);
+          return;
+        }
+        this.<>1__state = -2;
+        this.<>t__builder.SetResult();
+      }
+
+      [DebuggerHidden]
+      void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
+      {
+      }
+    }
+  }
+}
