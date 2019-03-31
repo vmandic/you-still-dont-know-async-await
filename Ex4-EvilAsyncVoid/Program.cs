@@ -17,11 +17,13 @@ namespace Ex4_EvilAsyncVoid
         // "Some people just want to watch the world burn..."
         VoidMethodAsync(); // NOTE: can't .Wait() or .Result or anything...
 
-        // STEP 2.
+        #region STEP 2.
         // Task.Run(new Action(async () => throw new Exception("Error!")));
+        #endregion
 
-        // STEP 3.
+        #region STEP 3.
         // Task.Run(async () => throw new Exception("Error!"));
+        #endregion
       }
       catch (Exception ex)
       {
@@ -52,8 +54,9 @@ namespace Ex4_EvilAsyncVoid
       */
       #endregion
 
-      // STEP 1.
+      #region STEP 1.
       // throw new Exception("Error!");
+      #endregion
 
       WriteLineWithThreadId("Ended async void.");
     }

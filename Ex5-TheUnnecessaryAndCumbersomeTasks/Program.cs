@@ -17,24 +17,28 @@ namespace Ex5_TheUnnecessaryAndCumbersomeTasks
       WriteLine("The answer to everything (bad): " + answer);
       answer = 0;
 
-      // STEP 1.
+      #region STEP 1. Good
       // answer = CalculateAsyncGood(40, 2).GetAwaiter().GetResult();
       // WriteLine("The answer to everything (good): " + answer);
       // answer = 0;
+      #endregion
 
-      // STEP 2.
+      #region STEP 2. Better
       // answer = CalculateAsyncBetter(40, 2).GetAwaiter().GetResult();
       // WriteLine("The answer to everything (better): " + answer);
       // answer = 0;
+      #endregion
 
-      // STEP 3.
+      #region STEP 3. Best
       // answer = CalculateBest(40, 2);
       // WriteLine("The answer to everything (best): " + answer);
       // answer = 0;
+      #endregion
 
-      // STEP 4.
+      #region STEP 4. Realistic
       // answer = CalculateAsyncRealistic(40, 2).GetAwaiter().GetResult();
       // WriteLine("The answer to everything (worked hard on this): " + answer);
+      #endregion
     }
 
     static Task<int> CalculateAsyncBad(int a, int b)

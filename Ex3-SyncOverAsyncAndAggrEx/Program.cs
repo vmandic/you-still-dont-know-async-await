@@ -15,10 +15,11 @@ namespace Ex3_SyncOverAsyncAndAggrEx
       {
         WriteLineWithThreadId("[START] Before async work...");
 
-        SomeNonAsyncLogic();
+        RunSyncOverAsync();
 
-        // STEP 2.
+        #region STEP 2.
         // Task.Run(() => AsyncOpWhichThrows().Wait()).Wait();
+        # endregion
       }
       catch (System.Exception ex)
       {
@@ -42,14 +43,17 @@ namespace Ex3_SyncOverAsyncAndAggrEx
           WriteLineWithThreadId("Performing async work on another ThreadPool Thread...");
           await Task.Delay(3000);
 
-          // STEP 1.
-          throw new Exception("Err!");
+          #region STEP 1.
+          // throw new Exception("Err!");
+          #endregion
 
           WriteLineWithThreadId("Async work done!");
 
         }).Wait();
-        // STEP 3.
+
+        #region STEP 3.
         // }).GetAwaiter().GetResult();
+        #endregion
     }
 
     async static Task AsyncOpWhichThrows()

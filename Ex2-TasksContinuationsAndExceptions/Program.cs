@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Console;
 
 // 2. How do continuations work?
 // When is the new Tasks work executed?

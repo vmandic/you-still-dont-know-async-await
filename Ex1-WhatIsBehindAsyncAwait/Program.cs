@@ -16,7 +16,7 @@ namespace Ex1_WhatIsBehindAsyncAwait
       SleepAsync().Wait();
 
       WriteLine("[END] Press any key to exit...");
-      Console.ReadLine();
+      ReadLine();
     }
 
     async static Task SleepAsync()
