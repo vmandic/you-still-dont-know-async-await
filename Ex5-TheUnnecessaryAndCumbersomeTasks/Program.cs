@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using static System.Console;
 
 // 5. Fake asynchronicity? Why don’t to spawn CPU bound ThreadPool tasks? How do you start a task?
-// Check out what doese JsonConvert.SerializeAsync() do: https://stackoverflow.com/a/15648126/1534753
+// Check out what does JsonConvert.SerializeAsync() do: https://stackoverflow.com/a/15648126/1534753
 namespace Ex5_TheUnnecessaryAndCumbersomeTasks
 {
   class Program
@@ -65,7 +65,7 @@ namespace Ex5_TheUnnecessaryAndCumbersomeTasks
     {
       return Task.Factory.StartNew<int>(() =>
       {
-        WriteLine("Is the 'CalculateTrully()' thread from pool: " + Thread.CurrentThread.IsThreadPoolThread);
+        WriteLine("Is the 'CalculateAsyncRealistic()' thread from a thread pool: " + Thread.CurrentThread.IsThreadPoolThread);
 
         for (int i = 0; i < 100000000; i++);
         for (int i = 0; i < 100000000; i++);

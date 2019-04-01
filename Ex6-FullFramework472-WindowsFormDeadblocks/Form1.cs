@@ -27,7 +27,7 @@ namespace Ex6_FullFramework472_WindowsFormDeadblocks
 
     private void button2_Click(object sender, EventArgs e)
     {
-      Text += " DEADBLOCKED!";
+      Text += " DEADLOCKED!";
 
       // Blocks the UI thread forever, "Deadblock".
       // Offloads the action to a single ThreadPool thread, task can not signal completion!
