@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static System.Console;
 
@@ -35,7 +36,7 @@ namespace Ex8_CantRunInAsyncContext
       _ = db ??
         throw new ArgumentNullException(nameof(db));
 
-      // NOTE: sync-over-async, i.e we are blocking!
+      // NOTE: sync-over-async, might deadlock, i.e we are blocking!
       Cars = db.GetCarsQueryAsync().Result.ToList();
     }
 
@@ -71,5 +72,18 @@ namespace Ex8_CantRunInAsyncContext
       await Task.Delay(2000);
       return new List<string> { "Rimac concept_two", "Opel Vectra", "Audi A8" };
     }
+  }
+
+  // another awesome helper to help you in lazy / async init:
+  // ref: https://devblogs.microsoft.com/pfxteam/asynclazyt/
+  public class AsyncLazy<T> : Lazy<Task<T>>
+  {
+    public AsyncLazy(Func<T> valueFactory) : base(
+      () => Task.Factory.StartNew(valueFactory)) { }
+
+    public AsyncLazy(Func<Task<T>> taskFactory) : base(
+      () => Task.Factory.StartNew(() => taskFactory()).Unwrap()) { }
+
+    public TaskAwaiter<T> GetAwaiter() => Value.GetAwaiter();
   }
 }

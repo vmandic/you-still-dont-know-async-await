@@ -8,6 +8,7 @@ using static System.Console;
 // What happens when you ignore a task?
 // Why does an exception get 'swallowed'? (also more in async void example)
 // What result is carried out in a failing continuation?
+// How do we access the inner task that carries the value? await (await t)? :-)
 namespace Ex2_TasksContinuationsAndExceptions
 {
   class Program
@@ -19,23 +20,32 @@ namespace Ex2_TasksContinuationsAndExceptions
 
       var t = LetsWait();
 
-      #region STEP 2.
+      #region STEP 2. how do continuations work?
       // WriteLineWithThreadId("Before 'ContinueWith()'...");
-      // t.ContinueWith(_ => // or even ConfigureAwait(false)
+      // t.ContinueWith(_ =>
       // {
-      #region STEP 3.
+      #region STEP 3. errors from continuations?
       //   throw new Exception("Error from continuation!");
       //   WriteLineWithThreadId("Hello World from continuation!");
       #endregion
-      //   return 2;
+      //   return 16;
+      #region STEP 6.1. inner task, comment line before
+      //    return Task.Run(() => 42);
+      #endregion
       // });
       #endregion
 
       #region STEP 5., comment out STEP 4.
-      // WriteLineWithThreadId("Result is: " + t.Result);
+      // var result = await t;
+      #endregion
+      #region STEP 6.2., comment out previous STEP 5.
+      // var unwrappedTask = t.Unwrap();
+      // var reuslt = await unwrappedTask;
       #endregion
 
-      #region STEP 4.
+      // WriteLineWithThreadId($"Result is: {result}");
+
+      #region STEP 4. resolving a task by awaiting it
       // await t;
       #endregion
 
@@ -43,7 +53,7 @@ namespace Ex2_TasksContinuationsAndExceptions
       ReadLine();
     }
 
-    #region STEP 5.
+    #region STEP 5. tasks can carry values
     // async static Task<int> LetsWait()
     #endregion
     async static Task LetsWait()
@@ -52,7 +62,7 @@ namespace Ex2_TasksContinuationsAndExceptions
       await Task.Delay(3000);
       WriteLineWithThreadId("After delay in 'LetsWait()'.");
 
-      #region STEP 1. what happens when you ignore a task
+      #region STEP 1. what happens when you ignore a task?
       // throw new Exception("Err!");
       #endregion
 
