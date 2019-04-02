@@ -20,11 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex8-CantRunInAsyncContext", "Ex8-CantRunInAsyncContext\Ex8-CantRunInAsyncContext.csproj", "{90706741-CCD6-4AB7-B15B-2D6CA6A882F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex8-CantRunInAsyncContext", "Ex8-CantRunInAsyncContext\Ex8-CantRunInAsyncContext.csproj", "{90706741-CCD6-4AB7-B15B-2D6CA6A882F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex6-FullFramework472-WindowsFormDeadblocks", "Ex6-FullFramework472-WindowsFormDeadblocks\Ex6-FullFramework472-WindowsFormDeadblocks.csproj", "{51FB4554-4B83-4FDC-A007-ABE49463751A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex9-AsyncAwaitTraps", "Ex9-AsyncAwaitTraps\Ex9-AsyncAwaitTraps.csproj", "{CDA2A060-8E21-4244-BC08-F1123A7F9398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex9-AsyncAwaitTraps", "Ex9-AsyncAwaitTraps\Ex9-AsyncAwaitTraps.csproj", "{CDA2A060-8E21-4244-BC08-F1123A7F9398}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex7-FullFramework472-AspNetMvcDeadblocks", "Ex7-FullFramework472-AspNetMvcDeadblocks\Ex7-FullFramework472-AspNetMvcDeadblocks.csproj", "{B9661BD7-2DFF-44B7-878D-C348A76B04A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -132,6 +134,18 @@ Global
 		{CDA2A060-8E21-4244-BC08-F1123A7F9398}.Release|x64.Build.0 = Release|Any CPU
 		{CDA2A060-8E21-4244-BC08-F1123A7F9398}.Release|x86.ActiveCfg = Release|Any CPU
 		{CDA2A060-8E21-4244-BC08-F1123A7F9398}.Release|x86.Build.0 = Release|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Debug|x64.Build.0 = Debug|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Debug|x86.Build.0 = Debug|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Release|x64.ActiveCfg = Release|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Release|x64.Build.0 = Release|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Release|x86.ActiveCfg = Release|Any CPU
+		{B9661BD7-2DFF-44B7-878D-C348A76B04A8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
