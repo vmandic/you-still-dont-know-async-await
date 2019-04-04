@@ -1,14 +1,12 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
 
 // 2. How do continuations work?
-// When is the new Tasks work executed?
-// What happens when you ignore a task?
-// Why does an exception get 'swallowed'? (also more in async void example)
-// What result is carried out in a failing continuation?
-// How do we access the inner task that carries the value? await (await t)? :-)
+// When is a Task (work delegate) executed?
+// What happens when you ignore a task (which throws)?
+// How do we access the inner task that carries the value?
 namespace Ex2_TasksContinuationsAndExceptions
 {
   class Program
@@ -18,45 +16,42 @@ namespace Ex2_TasksContinuationsAndExceptions
     {
       WriteLineWithThreadId("[START] Before 'LetsWait()'...");
 
-      var t = LetsWait();
+      var task = LetsWaitAsync();
+      var result = 0;
 
       #region STEP 2. how do continuations work?
-      // WriteLineWithThreadId("Before 'ContinueWith()'...");
-      // t.ContinueWith(_ =>
-      // {
-      #region STEP 3. errors from continuations?
-      //   throw new Exception("Error from continuation!");
-      //   WriteLineWithThreadId("Hello World from continuation!");
-      #endregion
-      //   return 16;
-      #region STEP 6.1. inner task, comment line before
-      //    return Task.Run(() => 42);
-      #endregion
-      // });
+
+      WriteLineWithThreadId("Before 'ContinueWith()'...");
+      var nextTask = task.ContinueWith((Task<int> prevTask) =>
+      {
+        #region STEP 3. errors from continuations?
+        //throw new Exception("Error from continuation!");
+        //WriteLineWithThreadId("Hello World from continuation!");
+        #endregion
+
+        return prevTask.Result + 1;
+
+        #region STEP 4.1. inner task, comment line before
+        //return Task.Run(() => prevTask.Result + 41);
+        #endregion
+      });
+
+      result = await nextTask;
+
       #endregion
 
-      #region STEP 5., comment out STEP 4.
-      // var result = await t;
-      #endregion
-      #region STEP 6.2., comment out previous STEP 5.
-      // var unwrappedTask = t.Unwrap();
-      // var reuslt = await unwrappedTask;
+      #region STEP 4.2.
+       //var unwrappedTask = nextTask.Unwrap();
+       //result = await unwrappedTask;
       #endregion
 
-      // WriteLineWithThreadId($"Result is: {result}");
-
-      #region STEP 4. resolving a task by awaiting it
-      // await t;
-      #endregion
+      WriteLineWithThreadId($"Result is: {result}");
 
       WriteLineWithThreadId("[END] Press any key to exit...");
       ReadLine();
     }
 
-    #region STEP 5. tasks can carry values
-    // async static Task<int> LetsWait()
-    #endregion
-    async static Task LetsWait()
+    async static Task<int> LetsWaitAsync()
     {
       WriteLineWithThreadId("Before delay in 'LetsWait()'...");
       await Task.Delay(3000);
@@ -66,9 +61,7 @@ namespace Ex2_TasksContinuationsAndExceptions
       // throw new Exception("Err!");
       #endregion
 
-      #region STEP 5.
-      // return 1;
-      #endregion
+      return 1;
     }
 
     static void WriteLineWithThreadId(string output) =>
