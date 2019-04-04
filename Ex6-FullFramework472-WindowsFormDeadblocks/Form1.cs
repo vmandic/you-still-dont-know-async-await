@@ -13,11 +13,11 @@ namespace Ex6_FullFramework472_WindowsFormDeadblocks
       InitializeComponent();
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    void button1_Click(object sender, EventArgs e)
     {
       Text += " BLOCKED!";
 
-      // Blocks the UI thread and keeps it waiting, "Sync over Async."
+      // Blocks the UI thread and keeps it waiting, "Sync over Async"
       // Offloads action to ThreadPool thread (Task) which can be signaled inside from another Task for completion.
       var someResult = Task.Run(CalcNumberAsync).Result;
       ShowResult(someResult);
@@ -25,7 +25,7 @@ namespace Ex6_FullFramework472_WindowsFormDeadblocks
       Text = Text.Replace(" BLOCKED!", string.Empty);
     }
 
-    private void button2_Click(object sender, EventArgs e)
+    void button2_Click(object sender, EventArgs e)
     {
       Text += " DEADLOCKED!";
 
@@ -35,15 +35,14 @@ namespace Ex6_FullFramework472_WindowsFormDeadblocks
       ShowResult(someResult);
     }
 
-    private async void button3_Click(object sender, EventArgs e)
+    async void button3_Click(object sender, EventArgs e)
     {
       // NOTE: try removing the await
-      await Task.Run(() => {
-        button3.Text = $"Changed text! [{DateTime.Now}]";
-      });
+      await Task.Run(() => button3.Text = $"Changed text! [{DateTime.Now}]");
+      // try using ConfigureAwait(false)
     }
 
-    private async void button4_Click(object sender, EventArgs e)
+    async void button4_Click(object sender, EventArgs e)
     {
       // disable te UI first in the current UI SynchronizationContext
       Cursor.Current = Cursors.WaitCursor;
@@ -62,13 +61,13 @@ namespace Ex6_FullFramework472_WindowsFormDeadblocks
       ShowResult(someResult);
     }
 
-    private async Task<double> CalcNumberAsync()
+    async Task<double> CalcNumberAsync()
     {
       await Task.Delay(3000);
       return Math.Round(_rand.NextDouble() * 1000);
     }
 
-    private static void ShowResult(double someResult) =>
+    static void ShowResult(double someResult) =>
       MessageBox.Show($"[{ DateTime.Now.ToShortTimeString() }] Result is: { someResult }");
   }
 }

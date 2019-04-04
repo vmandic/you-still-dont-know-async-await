@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
@@ -10,7 +10,7 @@ namespace Ex4_EvilAsyncVoid
   {
     static void Main(string[] args)
     {
-      WriteLineWithThreadId("[START] Before 'VoidMethodAsync()'...");
+      WriteLineWithThreadId("[Main START] Before 'VoidMethodAsync()'...");
 
       try
       {
@@ -27,16 +27,16 @@ namespace Ex4_EvilAsyncVoid
       }
       catch (Exception ex)
       {
-        WriteLineWithThreadId($"Error caught: {ex.Message}, type: {ex.GetType().FullName}");
+        WriteLineWithThreadId($"[Main] Error caught: {ex.Message}, type: {ex.GetType().FullName}");
       }
 
-      WriteLineWithThreadId("[END] Press any key to exit...");
+      WriteLineWithThreadId("[Main END] Press any key to exit...");
       ReadLine();
     }
 
     static async void VoidMethodAsync()
     {
-      WriteLineWithThreadId("Started async void...");
+      WriteLineWithThreadId("[VoidMethodAsync] Started async void...");
 
       await Task.Delay(3000);
 
@@ -55,13 +55,13 @@ namespace Ex4_EvilAsyncVoid
       #endregion
 
       #region STEP 1.
-      // throw new Exception("Error!");
+      //throw new Exception("Error!");
       #endregion
 
-      WriteLineWithThreadId("Ended async void.");
+      WriteLineWithThreadId("[VoidMethodAsync] Ended async void.");
     }
 
     static void WriteLineWithThreadId(string output) =>
-      WriteLine($"[ThreadId: { Thread.CurrentThread.ManagedThreadId }] { output }");
+      WriteLine($"[T: { Thread.CurrentThread.ManagedThreadId }] { output }");
   }
 }

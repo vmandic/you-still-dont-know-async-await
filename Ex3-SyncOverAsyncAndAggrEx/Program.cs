@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
@@ -7,21 +7,21 @@ using static System.Console;
 // How to unwrap an aggregate exception?
 namespace Ex3_SyncOverAsyncAndAggrEx
 {
-  class Program
+  internal class Program
   {
     static void Main(string[] args)
     {
       try
       {
-        WriteLineWithThreadId("[START] Before async work...");
+        WriteLineWithThreadId("[Main START] Before async work...");
 
-        RunSyncOverAsync();
+        SyncOverAsyncCall();
 
         #region STEP 2.
         // Task.Run(() => AsyncOpWhichThrows().Wait()).Wait();
         # endregion
       }
-      catch (System.Exception ex)
+      catch (Exception ex)
       {
         WriteLineWithThreadId($@"Exception caught!
 
@@ -31,38 +31,46 @@ namespace Ex3_SyncOverAsyncAndAggrEx
         ");
       }
 
-      WriteLineWithThreadId("[END] Press any key to exit...");
+      WriteLineWithThreadId("[Main END] Press any key to exit...");
       ReadLine();
     }
 
-    static void RunSyncOverAsync()
+    static void SyncOverAsyncCall()
     {
-        // start of a new ThreadPool Thread async action and block running thread
-        Task.Run(async() =>
-        {
-          WriteLineWithThreadId("Performing async work on another ThreadPool Thread...");
-          await Task.Delay(3000);
+      WriteLineWithThreadId("[SyncOverAsyncCall] Blocking...");
 
-          #region STEP 1.
-          // throw new Exception("Err!");
-          #endregion
+      // start of a new ThreadPool Thread async action and block running thread
+      Task.Run(async () => // start the lambda action in async context
+      {
+        WriteLineWithThreadId("[SyncOverAsyncCall Task.Run] New TP Thread. Before 3s delay...");
 
-          WriteLineWithThreadId("Async work done!");
+        await Task.Delay(3000);
 
-        }).Wait();
-
-        #region STEP 3.
-        // }).GetAwaiter().GetResult();
+        #region STEP 1.
+        // throw new Exception("Err!");
         #endregion
+
+        WriteLineWithThreadId("[SyncOverAsyncCall Task.Run] Wait done. What thread am I?");
+      }).Wait(); // <-- MainThread blocked! Waiting for task to complete...
+
+      WriteLineWithThreadId("[SyncOverAsyncCall] Block over!");
+
+      #region STEP 3.
+      // }).GetAwaiter().GetResult(); // <-- WARNING: also a blocking call!
+      #endregion
     }
 
-    async static Task AsyncOpWhichThrows()
+    static async Task AsyncOpWhichThrows()
     {
+      WriteLineWithThreadId("[AsyncOpWhichThrows] Before 3s delay...");
+
       await Task.Delay(3000);
+
+      WriteLineWithThreadId("[AsyncOpWhichThrows] Wait done.");
       throw new Exception("Err urgh...");
     }
 
     static void WriteLineWithThreadId(string output) =>
-      WriteLine($"[ThreadId: { Thread.CurrentThread.ManagedThreadId }] { output }");
+      WriteLine($"[T: { Thread.CurrentThread.ManagedThreadId }] { output }");
   }
 }

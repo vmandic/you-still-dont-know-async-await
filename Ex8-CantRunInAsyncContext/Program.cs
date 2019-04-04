@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Ex8_CantRunInAsyncContext
   {
     static void Main(string[] args)
     {
-      WriteLine("[START] Initializing car factory...");
+      WriteLine("[Main START] Initializing car factory...");
 
       var db = new DbCars();
       var carFactory = new CarFactory(db);

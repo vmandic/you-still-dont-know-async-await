@@ -1,9 +1,4 @@
-// Decompiled with JetBrains decompiler
-// Type: Ex1_WhatIsBehindAsyncAwait.Program
-// Assembly: Ex1-WhatIsBehindAsyncAwait, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 572A5A9B-4729-4FA0-BE9E-016B8A6C6D84
-// Assembly location: C:\Users\T\Documents\Projects\Windays19\Ex1-WhatIsBehindAsyncAwait\bin\Debug\netcoreapp2.1\Ex1-WhatIsBehindAsyncAwait.dll
-// Compiler-generated code is shown
+// Decompiled with JetBrains decompiler - dotPeek
 
 using System;
 using System.Diagnostics;
@@ -33,11 +28,6 @@ namespace Ex1_WhatIsBehindAsyncAwait
       return stateMachine.<>t__builder.Task;
     }
 
-    public Program()
-    {
-      base.\u002Ector();
-    }
-
     [CompilerGenerated]
     private sealed class <SleepAsync>d__1 : IAsyncStateMachine
     {
@@ -47,7 +37,7 @@ namespace Ex1_WhatIsBehindAsyncAwait
 
       public <SleepAsync>d__1()
       {
-        base.\u002Ector();
+        base.ctor();
       }
 
       void IAsyncStateMachine.MoveNext()
@@ -87,11 +77,6 @@ namespace Ex1_WhatIsBehindAsyncAwait
         }
         this.<>1__state = -2;
         this.<>t__builder.SetResult();
-      }
-
-      [DebuggerHidden]
-      void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
-      {
       }
     }
   }

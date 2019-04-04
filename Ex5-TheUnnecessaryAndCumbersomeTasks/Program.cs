@@ -1,9 +1,10 @@
-﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
 
-// 5. Fake asynchronicity? Why don’t to spawn CPU bound ThreadPool tasks? How do you start a task?
+// 5. Fake asynchronicity?
+// Why spawn CPU bound ThreadPool tasks?
+// How do you create or start a task?
 // Check out what does JsonConvert.SerializeAsync() do: https://stackoverflow.com/a/15648126/1534753
 namespace Ex5_TheUnnecessaryAndCumbersomeTasks
 {
@@ -53,20 +54,23 @@ namespace Ex5_TheUnnecessaryAndCumbersomeTasks
 
     static ValueTask<int> CalculateAsyncBetter(int a, int b)
     {
+      // FREEDOM TO ALL THE MEMORY!
       return new ValueTask<int>(a + b);
     }
 
     static int CalculateBest(int a, int b)
     {
+      // why use another thread?...
       return a + b;
     }
 
     static Task<int> CalculateAsyncRealistic(int a, int b)
     {
-      return Task.Factory.StartNew<int>(() =>
+      return Task.Factory.StartNew(() =>
       {
-        WriteLine("Is the 'CalculateAsyncRealistic()' thread from a thread pool: " + Thread.CurrentThread.IsThreadPoolThread);
+        WriteLine("'CalculateAsyncRealistic()' thread from a thread pool: " + Thread.CurrentThread.IsThreadPoolThread);
 
+        // for some reason (i.e. bad ex developer) this is a really CPU heavy op:
         for (int i = 0; i < 100000000; i++);
         for (int i = 0; i < 100000000; i++);
         for (int i = 0; i < 100000000; i++);

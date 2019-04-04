@@ -14,19 +14,20 @@ namespace Ex2_TasksContinuationsAndExceptions
     // ! async Main REQUIREMENT: <LangVersion>7.1</LangVersion> in .csproj
     async static Task Main(string[] args)
     {
-      WriteLineWithThreadId("[START] Before 'LetsWait()'...");
+      WriteLineWithThreadId("[Main START] Before 'LetsWait()'...");
 
       var task = LetsWaitAsync();
       var result = 0;
 
       #region STEP 2. how do continuations work?
 
-      WriteLineWithThreadId("Before 'ContinueWith()'...");
-      var nextTask = task.ContinueWith((Task<int> prevTask) =>
+      WriteLineWithThreadId("[Main] Before 'task.ContinueWith()'...");
+      var nextTask = task.ContinueWith((Task<int> prevTask) => // no context switch!
       {
+        WriteLineWithThreadId("[Task Continuation] Hello World from continuation!");
+
         #region STEP 3. errors from continuations?
         //throw new Exception("Error from continuation!");
-        //WriteLineWithThreadId("Hello World from continuation!");
         #endregion
 
         return prevTask.Result + 1;
@@ -45,17 +46,19 @@ namespace Ex2_TasksContinuationsAndExceptions
        //result = await unwrappedTask;
       #endregion
 
-      WriteLineWithThreadId($"Result is: {result}");
+      WriteLineWithThreadId($"[Main] Result is: {result}");
 
-      WriteLineWithThreadId("[END] Press any key to exit...");
+      WriteLineWithThreadId("[Main END] Press any key to exit...");
       ReadLine();
     }
 
     async static Task<int> LetsWaitAsync()
     {
-      WriteLineWithThreadId("Before delay in 'LetsWait()'...");
+      WriteLineWithThreadId("[LetsWait] Before delay 3s...");
+
       await Task.Delay(3000);
-      WriteLineWithThreadId("After delay in 'LetsWait()'.");
+
+      WriteLineWithThreadId("[LetsWait] After delay.");
 
       #region STEP 1. what happens when you ignore a task?
       // throw new Exception("Err!");
@@ -65,6 +68,6 @@ namespace Ex2_TasksContinuationsAndExceptions
     }
 
     static void WriteLineWithThreadId(string output) =>
-      WriteLine($"[ThreadId: { Thread.CurrentThread.ManagedThreadId }] { output }");
+      WriteLine($"[T: { Thread.CurrentThread.ManagedThreadId }] { output }");
   }
 }

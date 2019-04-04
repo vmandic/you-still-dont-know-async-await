@@ -36,10 +36,10 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(125, 51);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button1.Location = new System.Drawing.Point(125, 95);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(916, 121);
+            this.button1.Size = new System.Drawing.Size(1653, 121);
             this.button1.TabIndex = 0;
             this.button1.Text = "Block me (the whole app) for 3 seconds";
             this.button1.UseVisualStyleBackColor = true;
@@ -47,10 +47,10 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.Location = new System.Drawing.Point(125, 230);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button2.Location = new System.Drawing.Point(125, 345);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(916, 121);
+            this.button2.Size = new System.Drawing.Size(1653, 121);
             this.button2.TabIndex = 1;
             this.button2.Text = "Block me forever (goodbye!) - Deadblock";
             this.button2.UseVisualStyleBackColor = true;
@@ -58,10 +58,10 @@
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(125, 409);
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button3.Location = new System.Drawing.Point(125, 581);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(916, 121);
+            this.button3.Size = new System.Drawing.Size(1653, 121);
             this.button3.TabIndex = 2;
             this.button3.Text = "Update the UI from another thread :-)";
             this.button3.UseVisualStyleBackColor = true;
@@ -69,12 +69,12 @@
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button4.Location = new System.Drawing.Point(125, 589);
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button4.Location = new System.Drawing.Point(125, 823);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(916, 121);
+            this.button4.Size = new System.Drawing.Size(1653, 121);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Properly run async operation";
+            this.button4.Text = "Properly run an async operation";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 786);
+            this.ClientSize = new System.Drawing.Size(1905, 1059);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);

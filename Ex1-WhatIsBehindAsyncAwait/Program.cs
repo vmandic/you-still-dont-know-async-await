@@ -1,5 +1,3 @@
-﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
 
@@ -10,20 +8,20 @@ namespace Ex1_WhatIsBehindAsyncAwait
   {
     static void Main(string[] args)
     {
-      WriteLine("[START] Before 'SleepAsync().Wait()'...");
+      WriteLine("[Main START] Before 'SleepAsync().Wait()'...");
 
       // explicitly block the running thread with .Wait()
       SleepAsync().Wait();
 
-      WriteLine("[END] Press any key to exit...");
+      WriteLine("[Main END] Press any key to exit...");
       ReadLine();
     }
 
     async static Task SleepAsync()
     {
-      WriteLine("Before delay...");
+      WriteLine("[SleepAsync] Before delay 3s...");
       await Task.Delay(3000);
-      WriteLine("After delay...");
+      WriteLine("[SleepAsync] After delay...");
     }
   }
 }
