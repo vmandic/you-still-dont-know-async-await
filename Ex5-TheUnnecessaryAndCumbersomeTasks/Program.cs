@@ -19,26 +19,26 @@ namespace Ex5_TheUnnecessaryAndCumbersomeTasks
       answer = 0;
 
       #region STEP 1. Good
-      // answer = CalculateAsyncGood(40, 2).GetAwaiter().GetResult();
-      // WriteLine("The answer to everything (good): " + answer);
-      // answer = 0;
+      answer = CalculateAsyncGood(40, 2).GetAwaiter().GetResult();
+      WriteLine("The answer to everything (good): " + answer);
+      answer = 0;
       #endregion
 
       #region STEP 2. Better
-      // answer = CalculateAsyncBetter(40, 2).GetAwaiter().GetResult();
-      // WriteLine("The answer to everything (better): " + answer);
-      // answer = 0;
+      answer = CalculateAsyncBetter(40, 2).GetAwaiter().GetResult();
+      WriteLine("The answer to everything (better): " + answer);
+      answer = 0;
       #endregion
 
       #region STEP 3. Best
-      // answer = CalculateBest(40, 2);
-      // WriteLine("The answer to everything (best): " + answer);
-      // answer = 0;
+      answer = CalculateBest(40, 2);
+      WriteLine("The answer to everything (best): " + answer);
+      answer = 0;
       #endregion
 
       #region STEP 4. Realistic
-      // answer = CalculateAsyncRealistic(40, 2).GetAwaiter().GetResult();
-      // WriteLine("The answer to everything (worked hard on this): " + answer);
+      answer = CalculateAsyncRealistic(40, 2).GetAwaiter().GetResult();
+      WriteLine("The answer to everything (worked hard on this): " + answer);
       #endregion
     }
 

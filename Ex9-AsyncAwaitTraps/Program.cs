@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Console;
 
@@ -78,17 +79,21 @@ namespace Ex9_AsyncAwaitTraps
       // is this alright?
       dataPoints.ForEach(data => WriteToDiskAsync(data));
 
-      #region is this alrightier?
+      #region is this 'alrightier'?
       //dataPoints.ForEach(WriteToDiskAsync);
       #endregion
 
-      #region this must be it? :-)
-      // dataPoints.ForEach(async data => await WriteToDiskAsync(data));
+      #region this must be it?!?!? :-)
+      dataPoints.ForEach(async data => await WriteToDiskAsync(data));
       #endregion
 
-      #region or is it this POSS
-      // ... just don't do the above, let Eric explain it: https://blogs.msdn.microsoft.com/ericlippert/2009/05/18/foreach-vs-foreach/
-      foreach (var data in dataPoints) await WriteToDiskAsync(data);
+      #region or is it this KISS/POS sln?
+      // just don't do the above, also on ForEach let Eric explain it: https://blogs.msdn.microsoft.com/ericlippert/2009/05/18/foreach-vs-foreach/
+
+      foreach (var data in dataPoints)
+      {
+        await WriteToDiskAsync(data);
+      }
       #endregion
 
       async Task WriteToDiskAsync(byte data)
@@ -114,8 +119,48 @@ namespace Ex9_AsyncAwaitTraps
     #endregion
 
     // TRAP 4. Careful with someTask.ConfigureAwait(continueOnCapturedContext: false);
+
     // Always write ConfigureAwait(false) all the way until you return from your library code.
+
     // You do not need to use it anymore in ASP.NET Core.
     // ref: https://blog.stephencleary.com/2017/03/aspnetcore-synchronization-context.html
+
+
+    // TRAP 5. Due to no AspNetSC in .NET Core the below code behaves
+    // different in Full .NET Framework and .NET Core:
+    // ref: (implicit parallelism) in previous link
+    async Task<List<string>> ComputeFileNamesAsync()
+    {
+      var fileNames = new List<string>();
+
+      // start all in parallel
+      // (also, always favor Parallel.ForEach/For instead!)
+      await Task.WhenAll(
+        ComputeFileNameAsync(fileNames),
+        ComputeFileNameAsync(fileNames),
+        ComputeFileNameAsync(fileNames),
+        ComputeFileNameAsync(fileNames),
+        ComputeFileNameAsync(fileNames)
+      );
+
+      return fileNames;
+    }
+
+    async Task ComputeFileNameAsync(List<string> result)
+    {
+      await Task.Delay(1000);
+
+      // continue on captured context (if exists) and block 1s
+      Thread.Sleep(1000);
+
+      result.Add(Path.GetRandomFileName());
+
+      // on .NET Core: cca 1+1 sec to run
+      // on Full .NET: cca 1+5 sec to run
+    }
+
+    // MORE TRAPS:
+    // 1. https://markheath.net/post/async-antipatterns
+    // 2. https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md
   }
 }

@@ -18,12 +18,19 @@ namespace Ex4_EvilAsyncVoid
         VoidMethodAsync(); // NOTE: can't .Wait() or .Result or anything...
 
         #region STEP 2.
-        // Task.Run(new Action(async () => throw new Exception("Error!")));
+        //Task.Run(new Action(async () => {
+        //  await Task.Delay(1000);
+        //  throw new Exception("Error!");
+        //}));
         #endregion
 
         #region STEP 3.
-        // Task.Run(async () => throw new Exception("Error!"));
-        #endregion
+        //Task.Run(async () =>
+        //{
+        //  await Task.Delay(1000);
+        //  throw new Exception("Error!");
+        //});
+        #endregion)
       }
       catch (Exception ex)
       {

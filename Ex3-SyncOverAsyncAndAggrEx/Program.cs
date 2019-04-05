@@ -18,6 +18,7 @@ namespace Ex3_SyncOverAsyncAndAggrEx
         SyncOverAsyncCall();
 
         #region STEP 2.
+        // a more 'evil' approach...
         // Task.Run(() => AsyncOpWhichThrows().Wait()).Wait();
         # endregion
       }

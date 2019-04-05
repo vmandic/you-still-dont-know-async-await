@@ -21,23 +21,23 @@ namespace Ex2_TasksContinuationsAndExceptions
 
       #region STEP 2. how do continuations work?
 
-      WriteLineWithThreadId("[Main] Before 'task.ContinueWith()'...");
-      var nextTask = task.ContinueWith((Task<int> prevTask) => // no context switch!
-      {
-        WriteLineWithThreadId("[Task Continuation] Hello World from continuation!");
+      //WriteLineWithThreadId("[Main] Before 'task.ContinueWith()'...");
+      //var nextTask = task.ContinueWith((Task<int> prevTask) => // no context switch!
+      //{
+      //  WriteLineWithThreadId("[Task Continuation] Hello World from continuation!");
 
-        #region STEP 3. errors from continuations?
-        //throw new Exception("Error from continuation!");
-        #endregion
+      //  #region STEP 3. errors from continuations?
+      //  //throw new Exception("Error from continuation!");
+      //  #endregion
 
-        return prevTask.Result + 1;
+      //  return prevTask.Result + 1;
 
-        #region STEP 4.1. inner task, comment line before
-        //return Task.Run(() => prevTask.Result + 41);
-        #endregion
-      });
+      //  #region STEP 4.1. inner task, comment line before
+      //  //return Task.Run(() => prevTask.Result + 41);
+      //  #endregion
+      //});
 
-      result = await nextTask;
+      //result = await nextTask;
 
       #endregion
 
