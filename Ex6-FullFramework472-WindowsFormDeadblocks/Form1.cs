@@ -29,7 +29,7 @@ namespace Ex6_FullFramework472_WindowsFormDeadblocks
     {
       Text += " DEADLOCKED!";
 
-      // Blocks the UI thread forever, "Deadblock".
+      // Blocks the UI thread forever, "Deadlock".
       // Offloads the action to a single ThreadPool thread, task can not signal completion!
       var someResult = CalcNumberAsync().Result;
       ShowResult(someResult);
