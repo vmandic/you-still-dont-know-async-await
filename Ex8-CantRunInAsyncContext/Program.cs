@@ -23,7 +23,8 @@ namespace Ex8_CantRunInAsyncContext
       WriteLine("Our car factory produces the following models:\n");
       carFactory.Cars.ForEach(WriteLine);
 
-      WriteLine("\n[END]");
+      WriteLine("\n[END] Press any key to exit...");
+      ReadLine();
     }
   }
 
