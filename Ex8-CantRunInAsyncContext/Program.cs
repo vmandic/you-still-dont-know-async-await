@@ -7,6 +7,7 @@ using static System.Console;
 
 namespace Ex8_CantRunInAsyncContext
 {
+  // NOTE: you can not always use an async context, what then?
   class Program
   {
     static void Main(string[] args)
